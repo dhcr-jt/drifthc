@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Advena Living — Campaign Report</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #ffffff;
+    color: #111111;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    padding: 52px 52px 80px;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+
+  /* ── Header ── */
+  header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 40px;
+    padding-bottom: 24px;
+    border-bottom: 2px solid #111;
+  }
+
+  .header-left h1 {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: #111;
+    letter-spacing: -0.02em;
+  }
+
+  .header-left p {
+    font-size: 0.72rem;
+    color: #888;
+    margin-top: 5px;
+    letter-spacing: 0.02em;
+  }
+
+  .header-right {
+    text-align: right;
+    font-size: 0.72rem;
+    color: #888;
+    line-height: 1.7;
+  }
+
+  .header-right strong {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #111;
+    margin-bottom: 2px;
+  }
+
+  /* ── KPI Strip ── */
+  .kpi-strip {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 44px;
+  }
+
+  .kpi {
+    padding: 18px 20px;
+    border-right: 1px solid #e0e0e0;
+  }
+
+  .kpi:last-child { border-right: none; }
+
+  .kpi-label {
+    font-size: 0.64rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #999;
+    font-weight: 500;
+    margin-bottom: 7px;
+  }
+
+  .kpi-val {
+    font-size: 1.45rem;
+    font-weight: 600;
+    color: #111;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .kpi-val.secondary { font-size: 1.3rem; font-weight: 500; color: #444; }
+
+  /* ── Section label ── */
+  .section-label {
+    font-size: 0.64rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #999;
+    margin-bottom: 12px;
+  }
+
+  /* ── Facility Block ── */
+  .facility {
+    margin-bottom: 28px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+    animation: fadeUp 0.3s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .facility-header {
+    background: #f7f7f7;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 13px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .facility-name {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #111;
+    letter-spacing: -0.01em;
+  }
+
+  .facility-totals {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .fac-total {
+    font-size: 0.7rem;
+    color: #888;
+  }
+
+  .fac-total strong {
+    font-weight: 600;
+    color: #111;
+    margin-left: 4px;
+  }
+
+  /* ── Table ── */
+  table { width: 100%; border-collapse: collapse; }
+
+  thead th {
+    padding: 9px 20px;
+    text-align: left;
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #999;
+    font-weight: 500;
+    background: #fff;
+    border-bottom: 1px solid #e8e8e8;
+    white-space: nowrap;
+  }
+
+  thead th:not(:first-child) { text-align: right; }
+
+  tbody tr {
+    border-bottom: 1px solid #f0f0f0;
+    transition: background 0.1s;
+  }
+
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: #fafafa; }
+  tbody tr.inactive { opacity: 0.35; }
+
+  td {
+    padding: 10px 20px;
+    color: #111;
+    white-space: nowrap;
+  }
+
+  td:not(:first-child) { text-align: right; }
+
+  .pos-pill {
+    display: inline-block;
+    background: #f0f0f0;
+    border-radius: 3px;
+    padding: 2px 8px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: #333;
+  }
+
+  .inactive-tag {
+    font-size: 0.62rem;
+    color: #bbb;
+    margin-left: 7px;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+  }
+
+  .dash { color: #ddd; }
+
+  .qual-cell {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .qual-track {
+    width: 50px;
+    height: 3px;
+    background: #ebebeb;
+    border-radius: 2px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .qual-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: #111;
+  }
+
+  /* ── Footer ── */
+  footer {
+    margin-top: 48px;
+    padding-top: 18px;
+    border-top: 1px solid #e0e0e0;
+    font-size: 0.68rem;
+    color: #bbb;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  @media (max-width: 900px) {
+    body { padding: 24px 18px 60px; }
+    .kpi-strip { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <h1>Advena Living</h1>
+    <p>Facebook Ads &nbsp;·&nbsp; Ad Set Level Performance Report</p>
+  </div>
+  <div class="header-right">
+    <strong>Feb 26 – Mar 19, 2026</strong>
+    Attribution: 7-day click or 1-day view<br>
+    All amounts in USD
+  </div>
+</header>
+
+<div class="kpi-strip" id="kpiStrip"></div>
+
+<p class="section-label">Facility Breakdown</p>
+<div id="facilities"></div>
+
+<footer>
+  <span>Advena Living &nbsp;·&nbsp; Facebook Ads Manager Export</span>
+  <span>Generated March 20, 2026</span>
+</footer>
+
+<script>
+const raw = [
+  { facility:"Bonner Springs",  position:"CMA",      status:"active",   spend:33.65, cpr:8.41,  leads:4,  qualRate:25,  cpqc:0.03, impressions:1791, reach:950  },
+  { facility:"Bonner Springs",  position:"CNA",      status:"active",   spend:63.32, cpr:3.17,  leads:20, qualRate:90,  cpqc:0.28, impressions:4211, reach:1926 },
+  { facility:"Bonner Springs",  position:"RN",       status:"active",   spend:0.35,  cpr:null,  leads:0,  qualRate:null,cpqc:null,  impressions:27,   reach:21   },
+
+  { facility:"Clearwater",      position:"CMA",      status:"active",   spend:25.11, cpr:6.28,  leads:4,  qualRate:100, cpqc:0.16, impressions:1369, reach:837  },
+  { facility:"Clearwater",      position:"CNA",      status:"active",   spend:73.23, cpr:4.07,  leads:18, qualRate:61,  cpqc:0.15, impressions:5198, reach:2867 },
+  { facility:"Clearwater",      position:"RN & LPN", status:"active",   spend:4.88,  cpr:null,  leads:0,  qualRate:null,cpqc:null,  impressions:342,  reach:191  },
+  { facility:"Clearwater",      position:"RN",       status:"inactive", spend:0.00,  cpr:null,  leads:0,  qualRate:null,cpqc:null,  impressions:1,    reach:1    },
+
+  { facility:"Fountainview",    position:"CMA",      status:"active",   spend:40.03, cpr:3.64,  leads:11, qualRate:82,  cpqc:0.22, impressions:2917, reach:1634 },
+  { facility:"Fountainview",    position:"CNA",      status:"active",   spend:48.42, cpr:2.85,  leads:17, qualRate:100, cpqc:0.35, impressions:3880, reach:1979 },
+  { facility:"Fountainview",    position:"LPN",      status:"inactive", spend:2.83,  cpr:null,  leads:0,  qualRate:null,cpqc:null,  impressions:154,  reach:117  },
+  { facility:"Fountainview",    position:"RN & LPN", status:"active",   spend:0.54,  cpr:null,  leads:0,  qualRate:null,cpqc:null,  impressions:30,   reach:24   },
+  { facility:"Fountainview",    position:"RN",       status:"inactive", spend:0.10,  cpr:null,  leads:0,  qualRate:null,cpqc:null,  impressions:13,   reach:6    },
+
+  { facility:"On Tenth",        position:"CMA",      status:"active",   spend:4.17,  cpr:4.17,  leads:1,  qualRate:100, cpqc:0.24, impressions:218,  reach:86   },
+  { facility:"On Tenth",        position:"CNA",      status:"active",   spend:92.29, cpr:2.88,  leads:32, qualRate:94,  cpqc:0.33, impressions:7462, reach:2434 },
+  { facility:"On Tenth",        position:"RN & LPN", status:"active",   spend:2.19,  cpr:null,  leads:0,  qualRate:null,cpqc:null,  impressions:132,  reach:68   },
+
+  { facility:"Woodlawn",        position:"CNA",      status:"active",   spend:89.02, cpr:3.18,  leads:28, qualRate:100, cpqc:0.31, impressions:6426, reach:2726 },
+  { facility:"Woodlawn",        position:"RN & LPN", status:"active",   spend:12.01, cpr:12.01, leads:1,  qualRate:100, cpqc:0.08, impressions:601,  reach:393  },
+];
+
+const facilities = [...new Set(raw.map(r => r.facility))];
+
+const totSpend  = raw.reduce((s,r) => s+r.spend, 0);
+const totLeads  = raw.reduce((s,r) => s+r.leads, 0);
+const totImpr   = raw.reduce((s,r) => s+r.impressions, 0);
+const totReach  = raw.reduce((s,r) => s+r.reach, 0);
+const totQual   = raw.reduce((s,r) => s+(r.leads*(r.qualRate||0)/100), 0);
+const overallQR = totLeads ? Math.round(totQual/totLeads*100) : 0;
+const avgCPL    = totLeads ? totSpend/totLeads : 0;
+
+document.getElementById('kpiStrip').innerHTML = [
+  { label:"Total Amount Spent",   val:`$${totSpend.toFixed(2)}` },
+  { label:"Total Leads",          val:totLeads },
+  { label:"Avg Cost per Lead",    val:`$${avgCPL.toFixed(2)}` },
+  { label:"Impressions",          val:totImpr.toLocaleString(), cls:'secondary' },
+  { label:"Reach",                val:totReach.toLocaleString(), cls:'secondary' },
+].map(k=>`
+  <div class="kpi">
+    <div class="kpi-label">${k.label}</div>
+    <div class="kpi-val ${k.cls||''}">${k.val}</div>
+  </div>`).join('');
+
+const container = document.getElementById('facilities');
+
+facilities.forEach((fac, fi) => {
+  const rows   = raw.filter(r => r.facility === fac);
+  const fSpend = rows.reduce((s,r) => s+r.spend, 0);
+  const fLeads = rows.reduce((s,r) => s+r.leads, 0);
+  const fImpr  = rows.reduce((s,r) => s+r.impressions, 0);
+  const fReach = rows.reduce((s,r) => s+r.reach, 0);
+  const fQual  = rows.reduce((s,r) => s+(r.leads*(r.qualRate||0)/100), 0);
+  const fQR    = fLeads ? Math.round(fQual/fLeads*100) : null;
+  const fCPL   = fLeads ? fSpend/fLeads : null;
+
+  const totalsHtml = `
+    <div class="facility-totals">
+      <span class="fac-total">Spent<strong>$${fSpend.toFixed(2)}</strong></span>
+      <span class="fac-total">Leads<strong>${fLeads}</strong></span>
+      <span class="fac-total">Cost / Lead<strong>${fCPL ? '$'+fCPL.toFixed(2) : '—'}</strong></span>
+      <span class="fac-total">Impressions<strong>${fImpr.toLocaleString()}</strong></span>
+      <span class="fac-total">Reach<strong>${fReach.toLocaleString()}</strong></span>
+      <span class="fac-total">Qual. Rate<strong>${fQR !== null ? fQR+'%' : '—'}</strong></span>
+    </div>`;
+
+  const rowsHtml = rows.map(r => {
+    const inactive = r.status === 'inactive';
+    const cpr  = r.cpr  !== null ? `$${r.cpr.toFixed(2)}`  : `<span class="dash">—</span>`;
+    const leads= r.leads > 0    ? r.leads                  : `<span class="dash">—</span>`;
+    const cpqc = r.cpqc !== null ? `$${r.cpqc.toFixed(2)}` : `<span class="dash">—</span>`;
+
+    let qrCell = `<span class="dash">—</span>`;
+    if (r.qualRate !== null) {
+      qrCell = `<div class="qual-cell">
+        <div class="qual-track"><div class="qual-fill" style="width:${r.qualRate}%"></div></div>
+        ${r.qualRate}%
+      </div>`;
+    }
+
+    return `
+      <tr class="${inactive ? 'inactive' : ''}">
+        <td><span class="pos-pill">${r.position}</span>${inactive ? '<span class="inactive-tag">Paused</span>' : ''}</td>
+        <td>$${r.spend.toFixed(2)}</td>
+        <td>${cpr}</td>
+        <td>${leads}</td>
+        <td>${r.leads > 0 && r.qualRate !== null ? Math.round(r.leads * r.qualRate / 100) : '<span class="dash">—</span>'}</td>
+        <td>${r.impressions.toLocaleString()}</td>
+        <td>${r.reach.toLocaleString()}</td>
+        <td>${qrCell}</td>
+        <td>${cpqc}</td>
+      </tr>`;
+  }).join('');
+
+  const el = document.createElement('div');
+  el.className = 'facility';
+  el.style.animationDelay = `${fi * 0.05}s`;
+  el.innerHTML = `
+    <div class="facility-header">
+      <div class="facility-name">Advena Living — ${fac}</div>
+      ${totalsHtml}
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Position</th>
+          <th>Amount Spent</th>
+          <th>Cost per Result</th>
+          <th>Leads</th>
+          <th>Qualified</th>
+          <th>Impressions</th>
+          <th>Reach</th>
+          <th>Qual. Candidate Rate</th>
+          <th>Cost per Qual. Candidate</th>
+        </tr>
+      </thead>
+      <tbody>${rowsHtml}</tbody>
+    </table>`;
+  container.appendChild(el);
+});
+</script>
+</body>
+</html>
