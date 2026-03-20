@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+<title>Advena Living — Campaign Report</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    background: #f2f2f2;
+    color: #111;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 48px);
+    max-width: 430px;
+    margin: 0 auto;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: #111;
+    color: #fff;
+    padding: 20px 18px 18px;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+  }
+
+  .header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 4px;
+  }
+
+  header h1 {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: #fff;
+  }
+
+  .fb-badge {
+    font-size: 0.6rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #888;
+    background: #222;
+    border-radius: 3px;
+    padding: 3px 8px;
+  }
+
+  .header-period {
+    font-size: 0.7rem;
+    color: #777;
+  }
+
+  /* ── SUMMARY CARDS ── */
+  .summary-section {
+    padding: 14px 14px 6px;
+  }
+
+  .summary-title {
+    font-size: 0.62rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #999;
+    margin-bottom: 10px;
+    padding-left: 2px;
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .sum-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 12px 12px 10px;
+    border: 1px solid #e8e8e8;
+  }
+
+  .sum-card.wide {
+    grid-column: span 3;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .sum-card.wide .sum-item {
+    padding: 10px 12px;
+    border-right: 1px solid #f0f0f0;
+  }
+
+  .sum-card.wide .sum-item:last-child { border-right: none; }
+
+  .sum-label {
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #999;
+    font-weight: 500;
+    margin-bottom: 5px;
+    white-space: nowrap;
+  }
+
+  .sum-val {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #111;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .sum-val.sm { font-size: 1.05rem; }
+
+  /* ── FACILITY SECTION ── */
+  .facilities-section {
+    padding: 14px 14px 0;
+  }
+
+  .facility {
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #e5e5e5;
+    margin-bottom: 12px;
+    overflow: hidden;
+    animation: fadeUp 0.3s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(5px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Facility Header ── */
+  .fac-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13px 14px;
+    cursor: pointer;
+    user-select: none;
+    background: #fff;
+  }
+
+  .fac-header-left { flex: 1; min-width: 0; }
+
+  .fac-name {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #111;
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .fac-sub {
+    font-size: 0.7rem;
+    color: #888;
+  }
+
+  .fac-header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    margin-left: 10px;
+  }
+
+  .fac-leads-badge {
+    background: #111;
+    color: #fff;
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .chevron {
+    width: 18px;
+    height: 18px;
+    color: #ccc;
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .chevron.open { transform: rotate(180deg); }
+
+  /* ── Facility Totals Row ── */
+  .fac-totals {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f0f0f0;
+    background: #fafafa;
+  }
+
+  .fac-tot {
+    padding: 9px 12px;
+    border-right: 1px solid #f0f0f0;
+  }
+
+  .fac-tot:last-child { border-right: none; }
+
+  .ft-label {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #aaa;
+    font-weight: 500;
+    margin-bottom: 3px;
+  }
+
+  .ft-val {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #111;
+  }
+
+  /* ── Position Cards ── */
+  .positions { padding: 8px 10px 10px; display: flex; flex-direction: column; gap: 8px; }
+
+  .pos-card {
+    border: 1px solid #efefef;
+    border-radius: 7px;
+    overflow: hidden;
+  }
+
+  .pos-card.paused { opacity: 0.4; }
+
+  .pos-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 9px 12px;
+    background: #f7f7f7;
+    border-bottom: 1px solid #efefef;
+  }
+
+  .pos-title-row {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .pos-pill {
+    background: #111;
+    color: #fff;
+    border-radius: 4px;
+    padding: 3px 8px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .pos-pill.paused-pill {
+    background: #ddd;
+    color: #888;
+  }
+
+  .paused-label {
+    font-size: 0.62rem;
+    color: #bbb;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+  }
+
+  .pos-spend-label {
+    font-size: 0.72rem;
+    color: #888;
+  }
+
+  .pos-spend-val {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #111;
+  }
+
+  /* Stats inside position card — two rows of labeled pairs */
+  .pos-stats {
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .stat-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 6px;
+  }
+
+  .stat-row.two-col { grid-template-columns: 1fr 1fr; }
+
+  .stat-item { }
+
+  .stat-label {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #aaa;
+    font-weight: 500;
+    margin-bottom: 2px;
+    white-space: nowrap;
+  }
+
+  .stat-val {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #111;
+  }
+
+  .stat-val.dim { color: #ccc; font-weight: 400; }
+
+  /* Qual rate bar */
+  .qual-wrap { display: flex; flex-direction: column; gap: 4px; }
+
+  .qual-bar-track {
+    height: 4px;
+    background: #ebebeb;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .qual-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: #111;
+  }
+
+  /* Divider between stat rows */
+  .stat-divider {
+    height: 1px;
+    background: #f5f5f5;
+    margin: 0 -12px;
+  }
+
+  /* ── Collapsed ── */
+  .fac-body { display: block; }
+  .fac-body.hidden { display: none; }
+
+  /* ── Footer ── */
+  footer {
+    margin: 8px 14px 0;
+    padding: 16px 0;
+    border-top: 1px solid #e0e0e0;
+    font-size: 0.67rem;
+    color: #bbb;
+    line-height: 1.9;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <h1>Advena Living</h1>
+    <span class="fb-badge">Facebook Ads</span>
+  </div>
+  <div class="header-period">Feb 26 – Mar 19, 2026</div>
+</header>
+
+<div class="summary-section">
+  <div class="summary-title">Campaign Summary</div>
+  <div class="summary-grid" id="summaryGrid"></div>
+</div>
+
+<div class="facilities-section">
+  <div class="summary-title" style="margin-bottom:10px;">Facilities</div>
+  <div id="facilities"></div>
+</div>
+
+<footer>
+  Facebook Ads Manager &nbsp;·&nbsp; Attribution: 7-day click or 1-day view<br>
+  All amounts in USD &nbsp;·&nbsp; Generated March 20, 2026
+</footer>
+
+<script>
+const raw = [
+  { facility:"Bonner Springs",  position:"CMA",      status:"active",   spend:33.65, cpr:8.41,  leads:4,  qualRate:25,  cpqc:0.03, impressions:1791, reach:950  },
+  { facility:"Bonner Springs",  position:"CNA",      status:"active",   spend:63.32, cpr:3.17,  leads:20, qualRate:90,  cpqc:0.28, impressions:4211, reach:1926 },
+  { facility:"Bonner Springs",  position:"RN",       status:"active",   spend:0.35,  cpr:null,  leads:0,  qualRate:null,cpqc:null,  impressions:27,   reach:21   },
+
+  { facility:"Clearwater",      position:"CMA",      status:"active",   spend:25.11, cpr:6.28,  leads:4,  qualRate:100, cpqc:0.16, impressions:1369, reach:837  },
+  { facility:"Clearwater",      position:"CNA",      status:"active",   spend:73.23, cpr:4.07,  leads:18, qualRate:61,  cpqc:0.15, impressions:5198, reach:2867 },
+  { facility:"Clearwater",      position:"RN & LPN", status:"active",   spend:4.88,  cpr:null,  leads:0,  qualRate:null,cpqc:null,  impressions:342,  reach:191  },
+  { facility:"Clearwater",      position:"RN",       status:"inactive", spend:0.00,  cpr:null,  leads:0,  qualRate:null,cpqc:null,  impressions:1,    reach:1    },
+
+  { facility:"Fountainview",    position:"CMA",      status:"active",   spend:40.03, cpr:3.64,  leads:11, qualRate:82,  cpqc:0.22, impressions:2917, reach:1634 },
+  { facility:"Fountainview",    position:"CNA",      status:"active",   spend:48.42, cpr:2.85,  leads:17, qualRate:100, cpqc:0.35, impressions:3880, reach:1979 },
+  { facility:"Fountainview",    position:"LPN",      status:"inactive", spend:2.83,  cpr:null,  leads:0,  qualRate:null,cpqc:null,  impressions:154,  reach:117  },
+  { facility:"Fountainview",    position:"RN & LPN", status:"active",   spend:0.54,  cpr:null,  leads:0,  qualRate:null,cpqc:null,  impressions:30,   reach:24   },
+  { facility:"Fountainview",    position:"RN",       status:"inactive", spend:0.10,  cpr:null,  leads:0,  qualRate:null,cpqc:null,  impressions:13,   reach:6    },
+
+  { facility:"On Tenth",        position:"CMA",      status:"active",   spend:4.17,  cpr:4.17,  leads:1,  qualRate:100, cpqc:0.24, impressions:218,  reach:86   },
+  { facility:"On Tenth",        position:"CNA",      status:"active",   spend:92.29, cpr:2.88,  leads:32, qualRate:94,  cpqc:0.33, impressions:7462, reach:2434 },
+  { facility:"On Tenth",        position:"RN & LPN", status:"active",   spend:2.19,  cpr:null,  leads:0,  qualRate:null,cpqc:null,  impressions:132,  reach:68   },
+
+  { facility:"Woodlawn",        position:"CNA",      status:"active",   spend:89.02, cpr:3.18,  leads:28, qualRate:100, cpqc:0.31, impressions:6426, reach:2726 },
+  { facility:"Woodlawn",        position:"RN & LPN", status:"active",   spend:12.01, cpr:12.01, leads:1,  qualRate:100, cpqc:0.08, impressions:601,  reach:393  },
+];
+
+const facilities = [...new Set(raw.map(r => r.facility))];
+const totSpend  = raw.reduce((s,r) => s+r.spend, 0);
+const totLeads  = raw.reduce((s,r) => s+r.leads, 0);
+const totImpr   = raw.reduce((s,r) => s+r.impressions, 0);
+const totReach  = raw.reduce((s,r) => s+r.reach, 0);
+const totQual   = raw.reduce((s,r) => s+(r.leads*(r.qualRate||0)/100), 0);
+const overallQR = totLeads ? Math.round(totQual/totLeads*100) : 0;
+const avgCPL    = totLeads ? totSpend/totLeads : 0;
+
+// Summary grid
+document.getElementById('summaryGrid').innerHTML = `
+  <div class="sum-card">
+    <div class="sum-label">Total Spent</div>
+    <div class="sum-val">$${totSpend.toFixed(2)}</div>
+  </div>
+  <div class="sum-card">
+    <div class="sum-label">Total Leads</div>
+    <div class="sum-val">${totLeads}</div>
+  </div>
+  <div class="sum-card">
+    <div class="sum-label">Qual. Rate</div>
+    <div class="sum-val">${overallQR}%</div>
+  </div>
+  <div class="sum-card wide">
+    <div class="sum-item">
+      <div class="sum-label">Avg Cost / Lead</div>
+      <div class="sum-val sm">$${avgCPL.toFixed(2)}</div>
+    </div>
+    <div class="sum-item">
+      <div class="sum-label">Impressions</div>
+      <div class="sum-val sm">${totImpr.toLocaleString()}</div>
+    </div>
+    <div class="sum-item">
+      <div class="sum-label">Reach</div>
+      <div class="sum-val sm">${totReach.toLocaleString()}</div>
+    </div>
+  </div>`;
+
+// Facilities
+const container = document.getElementById('facilities');
+
+facilities.forEach((fac, fi) => {
+  const rows   = raw.filter(r => r.facility === fac);
+  const fSpend = rows.reduce((s,r) => s+r.spend, 0);
+  const fLeads = rows.reduce((s,r) => s+r.leads, 0);
+  const fImpr  = rows.reduce((s,r) => s+r.impressions, 0);
+  const fReach = rows.reduce((s,r) => s+r.reach, 0);
+  const fQual  = rows.reduce((s,r) => s+(r.leads*(r.qualRate||0)/100), 0);
+  const fQR    = fLeads ? Math.round(fQual/fLeads*100) : null;
+  const fCPL   = fLeads ? fSpend/fLeads : null;
+
+  const posCards = rows.map(r => {
+    const inactive  = r.status === 'inactive';
+    const qualified = r.leads > 0 && r.qualRate !== null ? Math.round(r.leads * r.qualRate / 100) : null;
+
+    const qualBlock = r.qualRate !== null ? `
+      <div class="qual-wrap">
+        <div class="stat-val">${r.qualRate}%</div>
+        <div class="qual-bar-track"><div class="qual-bar-fill" style="width:${r.qualRate}%"></div></div>
+      </div>` : `<div class="stat-val dim">—</div>`;
+
+    return `
+      <div class="pos-card ${inactive ? 'paused' : ''}">
+        <div class="pos-card-header">
+          <div class="pos-title-row">
+            <span class="pos-pill ${inactive ? 'paused-pill' : ''}">${r.position}</span>
+            ${inactive ? '<span class="paused-label">Paused</span>' : ''}
+          </div>
+          <div style="text-align:right">
+            <div class="pos-spend-label">Amount Spent</div>
+            <div class="pos-spend-val">$${r.spend.toFixed(2)}</div>
+          </div>
+        </div>
+        <div class="pos-stats">
+          <div class="stat-row">
+            <div class="stat-item">
+              <div class="stat-label">Leads</div>
+              <div class="stat-val">${r.leads > 0 ? r.leads : '<span class="dim">—</span>'}</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-label">Qualified</div>
+              <div class="stat-val">${qualified !== null ? qualified : '<span class="dim">—</span>'}</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-label">Qual. Rate</div>
+              ${qualBlock}
+            </div>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-row">
+            <div class="stat-item">
+              <div class="stat-label">Cost / Lead</div>
+              <div class="stat-val">${r.cpr !== null ? '$'+r.cpr.toFixed(2) : '<span class="dim">—</span>'}</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-label">Cost / Qual.</div>
+              <div class="stat-val">${r.cpqc !== null ? '$'+r.cpqc.toFixed(2) : '<span class="dim">—</span>'}</div>
+            </div>
+            <div class="stat-item"></div>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-row two-col">
+            <div class="stat-item">
+              <div class="stat-label">Impressions</div>
+              <div class="stat-val">${r.impressions.toLocaleString()}</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-label">Reach</div>
+              <div class="stat-val">${r.reach.toLocaleString()}</div>
+            </div>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+
+  const el = document.createElement('div');
+  el.className = 'facility';
+  el.style.animationDelay = `${fi * 0.06}s`;
+  el.innerHTML = `
+    <div class="fac-header" onclick="toggleFac(this)">
+      <div class="fac-header-left">
+        <div class="fac-name">Advena Living — ${fac}</div>
+        <div class="fac-sub">$${fSpend.toFixed(2)} spent &nbsp;·&nbsp; ${fImpr.toLocaleString()} impressions</div>
+      </div>
+      <div class="fac-header-right">
+        <span class="fac-leads-badge">${fLeads} leads</span>
+        <svg class="chevron open" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="4 6 8 10 12 6"/>
+        </svg>
+      </div>
+    </div>
+    <div class="fac-body">
+      <div class="fac-totals">
+        <div class="fac-tot">
+          <div class="ft-label">Cost / Lead</div>
+          <div class="ft-val">${fCPL ? '$'+fCPL.toFixed(2) : '—'}</div>
+        </div>
+        <div class="fac-tot">
+          <div class="ft-label">Reach</div>
+          <div class="ft-val">${fReach.toLocaleString()}</div>
+        </div>
+        <div class="fac-tot">
+          <div class="ft-label">Qual. Rate</div>
+          <div class="ft-val">${fQR !== null ? fQR+'%' : '—'}</div>
+        </div>
+      </div>
+      <div class="positions">${posCards}</div>
+    </div>`;
+  container.appendChild(el);
+});
+
+function toggleFac(header) {
+  const body    = header.nextElementSibling;
+  const chevron = header.querySelector('.chevron');
+  body.classList.toggle('hidden');
+  chevron.classList.toggle('open');
+}
+</script>
+</body>
+</html>
