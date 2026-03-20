@@ -386,27 +386,27 @@
 
 <script>
 const raw = [
-  { facility:"Bonner Springs",  position:"CMA",      status:"active",   spend:33.65, cpr:8.41,  leads:4,  qualRate:25,  cpqc:0.03, impressions:1791, reach:950  },
-  { facility:"Bonner Springs",  position:"CNA",      status:"active",   spend:63.32, cpr:3.17,  leads:20, qualRate:90,  cpqc:0.28, impressions:4211, reach:1926 },
-  { facility:"Bonner Springs",  position:"RN",       status:"active",   spend:0.35,  cpr:null,  leads:0,  qualRate:null,cpqc:null,  impressions:27,   reach:21   },
+  { facility:"Bonner Springs",  position:"CMA",        status:"active",   spend:33.65, cpr:8.41,  leads:4,  qualRate:25,   cpqc:33.65,  impressions:1791, reach:950  },
+  { facility:"Bonner Springs",  position:"CNA",        status:"active",   spend:63.32, cpr:3.17,  leads:20, qualRate:90,   cpqc:3.518,  impressions:4211, reach:1926 },
+  { facility:"Bonner Springs",  position:"RN",         status:"active",   spend:0.35,  cpr:null,  leads:0,  qualRate:null, cpqc:null,   impressions:27,   reach:21   },
 
-  { facility:"Clearwater",      position:"CMA",      status:"active",   spend:25.11, cpr:6.28,  leads:4,  qualRate:100, cpqc:0.16, impressions:1369, reach:837  },
-  { facility:"Clearwater",      position:"CNA",      status:"active",   spend:73.23, cpr:4.07,  leads:18, qualRate:61,  cpqc:0.15, impressions:5198, reach:2867 },
-  { facility:"Clearwater",      position:"RN & LPN", status:"active",   spend:4.88,  cpr:null,  leads:0,  qualRate:null,cpqc:null,  impressions:342,  reach:191  },
-  { facility:"Clearwater",      position:"RN",       status:"inactive", spend:0.00,  cpr:null,  leads:0,  qualRate:null,cpqc:null,  impressions:1,    reach:1    },
+  { facility:"Clearwater",      position:"CMA",        status:"active",   spend:25.11, cpr:6.28,  leads:4,  qualRate:100,  cpqc:6.278,  impressions:1369, reach:837  },
+  { facility:"Clearwater",      position:"CNA",        status:"active",   spend:73.23, cpr:4.07,  leads:18, qualRate:61,   cpqc:6.657,  impressions:5198, reach:2867 },
+  { facility:"Clearwater",      position:"RNs & LPNs", status:"active",   spend:4.88,  cpr:null,  leads:0,  qualRate:null, cpqc:null,   impressions:342,  reach:191  },
+  { facility:"Clearwater",      position:"RN",         status:"inactive", spend:0.00,  cpr:null,  leads:0,  qualRate:null, cpqc:null,   impressions:1,    reach:1    },
 
-  { facility:"Fountainview",    position:"CMA",      status:"active",   spend:40.03, cpr:3.64,  leads:11, qualRate:82,  cpqc:0.22, impressions:2917, reach:1634 },
-  { facility:"Fountainview",    position:"CNA",      status:"active",   spend:48.42, cpr:2.85,  leads:17, qualRate:100, cpqc:0.35, impressions:3880, reach:1979 },
-  { facility:"Fountainview",    position:"LPN",      status:"inactive", spend:2.83,  cpr:null,  leads:0,  qualRate:null,cpqc:null,  impressions:154,  reach:117  },
-  { facility:"Fountainview",    position:"RN & LPN", status:"active",   spend:0.54,  cpr:null,  leads:0,  qualRate:null,cpqc:null,  impressions:30,   reach:24   },
-  { facility:"Fountainview",    position:"RN",       status:"inactive", spend:0.10,  cpr:null,  leads:0,  qualRate:null,cpqc:null,  impressions:13,   reach:6    },
+  { facility:"Fountainview",    position:"CMA",        status:"active",   spend:40.03, cpr:3.64,  leads:11, qualRate:82,   cpqc:4.448,  impressions:2917, reach:1634 },
+  { facility:"Fountainview",    position:"CNA",        status:"active",   spend:48.42, cpr:2.85,  leads:17, qualRate:100,  cpqc:2.848,  impressions:3880, reach:1979 },
+  { facility:"Fountainview",    position:"LPN",        status:"inactive", spend:2.83,  cpr:null,  leads:0,  qualRate:null, cpqc:null,   impressions:154,  reach:117  },
+  { facility:"Fountainview",    position:"RNs & LPNs", status:"active",   spend:0.54,  cpr:null,  leads:0,  qualRate:null, cpqc:null,   impressions:30,   reach:24   },
+  { facility:"Fountainview",    position:"RN",         status:"inactive", spend:0.10,  cpr:null,  leads:0,  qualRate:null, cpqc:null,   impressions:13,   reach:6    },
 
-  { facility:"On Tenth",        position:"CMA",      status:"active",   spend:4.17,  cpr:4.17,  leads:1,  qualRate:100, cpqc:0.24, impressions:218,  reach:86   },
-  { facility:"On Tenth",        position:"CNA",      status:"active",   spend:92.29, cpr:2.88,  leads:32, qualRate:94,  cpqc:0.33, impressions:7462, reach:2434 },
-  { facility:"On Tenth",        position:"RN & LPN", status:"active",   spend:2.19,  cpr:null,  leads:0,  qualRate:null,cpqc:null,  impressions:132,  reach:68   },
+  { facility:"On Tenth",        position:"CMA",        status:"active",   spend:4.17,  cpr:4.17,  leads:1,  qualRate:100,  cpqc:4.17,   impressions:218,  reach:86   },
+  { facility:"On Tenth",        position:"CNA",        status:"active",   spend:92.29, cpr:2.88,  leads:32, qualRate:94,   cpqc:3.076,  impressions:7462, reach:2434 },
+  { facility:"On Tenth",        position:"RNs & LPNs", status:"active",   spend:2.19,  cpr:null,  leads:0,  qualRate:null, cpqc:null,   impressions:132,  reach:68   },
 
-  { facility:"Woodlawn",        position:"CNA",      status:"active",   spend:89.02, cpr:3.18,  leads:28, qualRate:100, cpqc:0.31, impressions:6426, reach:2726 },
-  { facility:"Woodlawn",        position:"RN & LPN", status:"active",   spend:12.01, cpr:12.01, leads:1,  qualRate:100, cpqc:0.08, impressions:601,  reach:393  },
+  { facility:"On Woodlawn",     position:"CNA",        status:"active",   spend:89.02, cpr:3.18,  leads:28, qualRate:100,  cpqc:3.179,  impressions:6426, reach:2726 },
+  { facility:"On Woodlawn",     position:"RNs & LPNs", status:"active",   spend:12.01, cpr:12.01, leads:1,  qualRate:100,  cpqc:12.01,  impressions:601,  reach:393  },
 ];
 
 const facilities = [...new Set(raw.map(r => r.facility))];
